@@ -21,17 +21,28 @@ data = {
     "full_text": ""
 }
 
-with pdfplumber.open(pdf_path) as pdf:
-    for i, page in enumerate(pdf.pages):
-        text = page.extract_text() or ""
-        clean_text = text.strip()
+try:
+    with pdfplumber.open(pdf_path) as pdf:
+        for i, page in enumerate(pdf.pages):
+            try:
+                text = page.extract_text() or ""
+            except Exception as e:
+                text = f"[ERROR extracting page {i+1}]"
 
-        data["pages"].append({
-            "page": i + 1,
-            "text": clean_text
-        })
+            clean_text = text.strip()
 
-        data["full_text"] += clean_text + "\n"
+            data["pages"].append({
+                "page": i + 1,
+                "text": clean_text
+            })
 
-# ✅ IMPORTANT: Only JSON output
+            data["full_text"] += clean_text + "\n"
+
+except Exception as e:
+    print(json.dumps({
+        "error": str(e)
+    }))
+    sys.exit(1)
+
+# ✅ Always return valid JSON
 print(json.dumps(data))
