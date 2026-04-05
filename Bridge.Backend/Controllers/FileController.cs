@@ -29,34 +29,35 @@ namespace Bridge.Backend.Controllers
                 // Absolute uploads path
                 var uploadsPath = Path.Combine(Directory.GetCurrentDirectory(), "uploads");
 
-                // ✅ Ensure folder exists
+                // Ensure folder exists
                 if (!Directory.Exists(uploadsPath))
                 {
                     Directory.CreateDirectory(uploadsPath);
                 }
 
-                // ✅ Unique file name
+                //  Unique file name
                 var fileName = $"{Guid.NewGuid()}{Path.GetExtension(file.FileName)}";
                 var filePath = Path.Combine(uploadsPath, fileName);
 
-                // ✅ Save file
+                // Save file
                 using (var stream = new FileStream(filePath, FileMode.Create))
                 {
                     await file.CopyToAsync(stream);
                 }
 
-                // ✅ Save initial record
+                // Save initial record
                 var fileRecord = new Models.FileRecord
                 {
                     FileName = file.FileName,
                     FilePath = filePath,
-                    Status = "processing"
+                    Status = "processing",
+                    ExtractedJson = "{}"
                 };
 
                 _context.Files.Add(fileRecord);
                 await _context.SaveChangesAsync();
 
-                // ✅ Run Python extraction
+                // Run Python extraction
                 var extractedJson = _pythonService.RunExtraction(filePath);
 
                 if (string.IsNullOrWhiteSpace(extractedJson))

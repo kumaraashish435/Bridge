@@ -1,4 +1,6 @@
 Bridge.Backend/obj
 Bridge.Backend/bin
+Bridge.Backend/uploads
 
 Bridge.Infra/.venv
+Bridge.Infra/.DS_Store
