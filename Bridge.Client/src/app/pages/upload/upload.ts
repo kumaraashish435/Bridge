@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-upload',
-  standalone: true, // ✅ IMPORTANT
+  standalone: true,
   imports: [CommonModule],
   templateUrl: './upload.html',
   styleUrl: './upload.css',
@@ -27,13 +27,20 @@ export class Upload {
 
     this.loading = true;
 
-    const response = await this.api.uploadFile(this.selectedFile);
+    try {
+      const response = await this.api.uploadFile(this.selectedFile);
 
-    this.loading = false;
+      this.result = response; // for preview (optional)
 
-    // ✅ Navigate to result page with data
-    this.router.navigate(['/result'], {
-      state: { data: response }
-    });
+      // Navigate to result page
+      this.router.navigate(['/result'], {
+        state: { data: response }
+      });
+
+    } catch (err) {
+      console.error("Upload failed:", err);
+    } finally {
+      this.loading = false;
+    }
   }
 }

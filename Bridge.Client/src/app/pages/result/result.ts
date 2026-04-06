@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 export class Result {
   result: any;
   selectedPage = 1;
+  objectKeys = Object.keys;
   
 
   constructor() {
