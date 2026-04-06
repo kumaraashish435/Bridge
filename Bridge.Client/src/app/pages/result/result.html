@@ -1,38 +1,10 @@
-<div class="min-h-screen bg-black text-white p-6">
+<div *ngIf="result?.data" class="space-y-4">
 
-  <h1 class="text-2xl mb-6">📊 Extraction Result</h1>
+  <h2 class="text-xl">📄 {{ result.data.type }}</h2>
 
-  <!-- File Info -->
-  <div class="bg-zinc-800 p-4 rounded mb-4">
-    <p><b>File ID:</b> {{ result?.fileId }}</p>
-    <p><b>Status:</b> <span class="text-green-400">{{ result?.status }}</span></p>
-  </div>
-
-  <!-- Pages Count -->
-  <div class="bg-zinc-800 p-4 rounded mb-4">
-    <p>Total Pages: {{ result?.data?.pages?.length }}</p>
-  </div>
-
-  <!-- Page Selector -->
-  <div class="bg-zinc-800 p-4 rounded mb-4">
-    <label>Select Page</label>
-
-    <select [(ngModel)]="selectedPage" class="w-full mt-2 p-2 bg-black border rounded">
-      <option *ngFor="let page of result?.data?.pages" [value]="page.page">
-        Page {{ page.page }}
-      </option>
-    </select>
-  </div>
-
-  <!-- Page Content -->
+  <!-- Show structured data -->
   <div class="bg-zinc-800 p-4 rounded">
-    <h3 class="mb-2">Page Content</h3>
-
-    <div class="max-h-64 overflow-auto text-sm text-gray-300">
-      {{
-        result?.data?.pages?.find(p => p.page == selectedPage)?.text
-      }}
-    </div>
+    <pre>{{ result.data | json }}</pre>
   </div>
 
 </div>

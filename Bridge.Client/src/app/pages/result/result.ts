@@ -11,18 +11,20 @@ import { FormsModule } from '@angular/forms';
 })
 export class Result {
   result: any;
-  selectedPage: number = 1;
+  selectedPage = 1;
+  
 
   constructor() {
-  this.result = history.state.data;
+    this.result = history.state.data;
 
-  if (!this.result) {
-    console.error('No data received');
-    return;
-  }
+    if (!this.result) {
+      console.error("No data received");
+      return;
+    }
 
-  if (this.result?.data) {
-    this.result.data = JSON.parse(this.result.data);
+    //  THIS IS CRITICAL
+    if (this.result.data) {
+      this.result.data = JSON.parse(this.result.data);
+    }
   }
-}
 }
