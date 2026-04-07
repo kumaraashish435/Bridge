@@ -77,7 +77,7 @@ namespace Bridge.Backend.Controllers
                 {
                     fileId = fileRecord.Id,
                     status = fileRecord.Status,
-                    data = fileRecord.ExtractedJson
+                    data = fileRecord.ExtractedJson ?? "{}"
                 });
             }
             catch (Exception ex)
