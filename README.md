@@ -67,7 +67,7 @@ CREATE DATABASE "Bridge_db";
 
 ---
 
-### 🔧 Update `appsettings.json`
+### Update `appsettings.json`
 
 ```json
 "ConnectionStrings": {
@@ -214,19 +214,19 @@ dotnet ef database update
 
 ---
 
-### ❌ PDF parsing error
+### PDF parsing error
 
 -> Some PDFs are malformed — handled safely in Python
 
 ---
 
-### ❌ File path issue
+### File path issue
 
 -> Always use absolute paths
 
 ---
 
-#  Future Improvements
+#  Future Improvements(pending)
 
 * AI-based data extraction
 * Invoice parsing (number, total, date)
@@ -234,11 +234,6 @@ dotnet ef database update
 * Frontend dashboard
 * Multi-file processing
 
----
-
-er | AI Developer | SaaS Builder
-
----
 
 #  Vision
 
